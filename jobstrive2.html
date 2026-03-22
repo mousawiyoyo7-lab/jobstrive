@@ -4,25 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jobstrive Mini Prototype</title>
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&family=Roboto&display=swap" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Roboto', sans-serif; margin: 0; background: #f5f5f5; color: #333; }
+  body { font-family: 'Old Standard TT', serif; margin: 0; background: #f5f5f5; color: #333; }
   header { background: #2a9d8f; color: white; padding: 25px 20px; text-align: center; }
-  header h1 { margin: 0; font-family: 'Old Standard TT', serif; font-size: 32px; }
+  header h1 { margin: 0; font-size: 32px; }
   header p { margin: 5px 0 0 0; font-size: 16px; }
   nav { display: flex; justify-content: center; background: #264653; }
-  nav a { color: white; padding: 15px 25px; text-decoration: none; font-weight: bold; }
+  nav a { color: white; padding: 15px 25px; text-decoration: none; font-weight: bold; font-size: 16px; }
   nav a:hover { background: #1b3b4a; }
   section { padding: 30px; max-width: 900px; margin: 20px auto; background: white; border-radius: 12px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
-  h2 { font-family: 'Old Standard TT', serif; color: #264653; margin-top: 0; text-align: center; }
+  h2 { color: #264653; margin-top: 0; text-align: center; }
   .jobs, .workshops, .mentors { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; }
   .card { background: #e9ecef; padding: 20px; border-radius: 10px; }
-  button { background: #2a9d8f; color: white; border: none; padding: 12px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
+  button { background: #2a9d8f; color: white; border: none; padding: 12px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; font-family: 'Old Standard TT', serif; font-size: 16px; }
   button:hover { background: #21867a; }
   .leaflet { background: #ffdd6b; padding: 25px; border-radius: 10px; text-align: center; }
   .leaflet img { width: 150px; margin: 15px 0; }
-  footer { text-align: center; padding: 20px; background: #264653; color: white; margin-top: 20px; border-top: 3px solid #2a9d8f; }
+  form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; font-family: 'Old Standard TT', serif; }
+  input, select { padding: 8px; border-radius: 5px; border: 1px solid #aaa; font-family: 'Old Standard TT', serif; }
+  .mentor-info { background:#d1f0e0; padding:10px; border-radius:8px; margin-top:10px; font-family: 'Old Standard TT', serif; }
 </style>
 </head>
 <body>
@@ -45,17 +47,53 @@
     <div class="card">
       <h3>Retail Assistant</h3>
       <p>Local store, part-time, entry-level. Flexible hours.</p>
-      <button>Apply Now</button>
+      <button onclick="toggleJobForm('Retail Assistant')">Apply Now</button>
+      <div id="form-Retail Assistant" style="display:none; margin-top:10px;">
+        <form onsubmit="submitJobForm(event, 'Retail Assistant')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <select name="availability" required>
+            <option value="">Select Availability</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+          </select>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
     </div>
     <div class="card">
       <h3>Admin Support</h3>
       <p>Office-based role, training included. Great first step!</p>
-      <button>Apply Now</button>
+      <button onclick="toggleJobForm('Admin Support')">Apply Now</button>
+      <div id="form-Admin Support" style="display:none; margin-top:10px;">
+        <form onsubmit="submitJobForm(event, 'Admin Support')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <select name="availability" required>
+            <option value="">Select Availability</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+          </select>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
     </div>
     <div class="card">
       <h3>Café Barista</h3>
       <p>Local café, part-time, flexible schedule, training provided.</p>
-      <button>Apply Now</button>
+      <button onclick="toggleJobForm('Café Barista')">Apply Now</button>
+      <div id="form-Café Barista" style="display:none; margin-top:10px;">
+        <form onsubmit="submitJobForm(event, 'Café Barista')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <select name="availability" required>
+            <option value="">Select Availability</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+          </select>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -65,15 +103,36 @@
   <div class="workshops">
     <div class="card">
       <h3>CV & Interview Skills</h3>
-      <button>Book Session</button>
+      <button onclick="toggleWorkshopForm('CV & Interview Skills')">Book Session</button>
+      <div id="workshop-CV & Interview Skills" style="display:none; margin-top:10px;">
+        <form onsubmit="submitWorkshopForm(event, 'CV & Interview Skills')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="date" name="date" required>
+          <button type="submit">Book Session</button>
+        </form>
+      </div>
     </div>
     <div class="card">
       <h3>Workplace Skills</h3>
-      <button>Book Session</button>
+      <button onclick="toggleWorkshopForm('Workplace Skills')">Book Session</button>
+      <div id="workshop-Workplace Skills" style="display:none; margin-top:10px;">
+        <form onsubmit="submitWorkshopForm(event, 'Workplace Skills')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="date" name="date" required>
+          <button type="submit">Book Session</button>
+        </form>
+      </div>
     </div>
     <div class="card">
       <h3>Confidence & Communication</h3>
-      <button>Book Session</button>
+      <button onclick="toggleWorkshopForm('Confidence & Communication')">Book Session</button>
+      <div id="workshop-Confidence & Communication" style="display:none; margin-top:10px;">
+        <form onsubmit="submitWorkshopForm(event, 'Confidence & Communication')">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="date" name="date" required>
+          <button type="submit">Book Session</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -84,12 +143,20 @@
     <div class="card">
       <h3>Peer Ambassador: Sarah</h3>
       <p>Former NEET now working in retail. Offers guidance and support.</p>
-      <button>Connect</button>
+      <button onclick="toggleMentor('Sarah')">Connect</button>
+      <div id="mentor-Sarah" class="mentor-info" style="display:none;">
+        <p>Name: Sarah Johnson</p>
+        <p>Email: sarah.jobstrive@example.com</p>
+      </div>
     </div>
     <div class="card">
       <h3>Mentor: James</h3>
       <p>Works in local administration. Helps with applications & confidence.</p>
-      <button>Connect</button>
+      <button onclick="toggleMentor('James')">Connect</button>
+      <div id="mentor-James" class="mentor-info" style="display:none;">
+        <p>Name: James Smith</p>
+        <p>Email: james.jobstrive@example.com</p>
+      </div>
     </div>
   </div>
 </section>
@@ -97,16 +164,42 @@
 <section id="leaflet">
   <h2>Leaflet / QR Access</h2>
   <div class="leaflet">
-    <p>Scan the QR code to access Jobstrive!</p>
-    <!-- QR linking to placeholder -->
+    <p>Scan the QR code to access Jobstrive directly!</p>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jobstrive.github.io/jobstrive/jobstrive2.html" alt="QR Code">
     <p>Simple, local, trusted access for NEET youth in West London.</p>
   </div>
 </section>
 
-<footer>
-  Jobstrive &copy; 2026 — Connecting NEET youth with real opportunities
-</footer>
+<script>
+function toggleJobForm(jobName) {
+  const div = document.getElementById('form-' + jobName);
+  div.style.display = div.style.display === 'none' ? 'block' : 'none';
+}
+
+function submitJobForm(event, jobName) {
+  event.preventDefault();
+  alert('Application submitted for ' + jobName + '!');
+  document.getElementById('form-' + jobName).style.display = 'none';
+  event.target.reset();
+}
+
+function toggleWorkshopForm(workshopName) {
+  const div = document.getElementById('workshop-' + workshopName);
+  div.style.display = div.style.display === 'none' ? 'block' : 'none';
+}
+
+function submitWorkshopForm(event, workshopName) {
+  event.preventDefault();
+  alert('Workshop booked: ' + workshopName);
+  document.getElementById('workshop-' + workshopName).style.display = 'none';
+  event.target.reset();
+}
+
+function toggleMentor(name) {
+  const div = document.getElementById('mentor-' + name);
+  div.style.display = div.style.display === 'none' ? 'block' : 'none';
+}
+</script>
 
 </body>
 </html>
